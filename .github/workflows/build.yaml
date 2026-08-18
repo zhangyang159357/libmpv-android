@@ -34,7 +34,9 @@ jobs:
         timeout-minutes: 8
         run: |
           sudo apt-get update
-          sudo apt-get install -y autoconf pkgconf libtool ninja-build python3-jinja2 gperf nasm meson
+          sudo apt-get install -y autoconf pkgconf libtool ninja-build python3-pip python3-jinja2 gperf nasm
+          python3 -m pip install --user --break-system-packages --timeout 60 --retries 3 meson==1.11.2
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Download dependencies
         working-directory: ./buildscripts
